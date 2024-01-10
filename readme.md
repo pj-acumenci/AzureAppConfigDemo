@@ -44,6 +44,26 @@ Sure - that's why this repo exists :)
 (All you need is access to an existing Azure App Configuration instance.)
 Just bung your connection string in [appsettings.local.json](AzureAppConfigDemo.Api/appsettings.local.json#L3)
 
+### Behaviour
+Hopefully, the relative simplicity of the implementation comes across.
+
+(There is a small amount of boilerplate (called from Program.cs) [here](AzureAppConfigDemo.Api/Features/Common/AppConfigStartupExtensions.cs#L24-L33)).
+
+Without a connection string, whatever config provided by appsettings / prior mechanism continue to be available.
+
+This is likely to be the "default" position for general development.
+
+But to benefit from a similar experience as a deployed application, you can do the following:
+  - Provide a valid connection string to an existing Azure App Config resource
+  - Specify whatever set of keys (and feature flags) you wish to control dynamically in Azure App Config
+  - Observe the dynamic behaviour, by calling the various endpoints (e.g. via Swagger UI)
+
+It is also worth mentioning the `FeatureGate` attribute - which can be added to controllers, or specific endpoints.
+
+With FeatureGate, if the specified feature is `disabled`, then requests to the affected endpoints will return 404s.
+(NB: Swagger is not aware of this runtime check - hence will continue to list the endpoint, regardless of disabled feature state).
+
+
 ## <a name="refs"></a> References
 1. https://12factor.net/config
 1. https://azure.github.io/PSRule.Rules.Azure/en/rules/Azure.AppConfig.SKU/#description
