@@ -16,10 +16,10 @@ using Microsoft.Extensions.Options;
 [AllowAnonymous]
 [Route("[controller]")]
 public class ConfigController(
-    IOptionsSnapshot<RadarSettings> settings,
+    IOptionsSnapshot<App1Settings> settings,
     IOptionsSnapshot<FeatureFlagOptions> featureFlags)
 {
-    private readonly RadarSettings settings = settings.Value;
+    private readonly App1Settings settings = settings.Value;
     private readonly FeatureFlagOptions featureFlagOptions = featureFlags.Value;
 
     /// <summary>
@@ -28,7 +28,7 @@ public class ConfigController(
     /// <returns>The settings.</returns>
     [HttpGet]
     [Route("settings")]
-    public RadarSettings GetSettings() => this.settings;
+    public App1Settings GetSettings() => this.settings;
 
     /// <summary>
     /// Gets feature flag information.

@@ -8,10 +8,10 @@ using System.ComponentModel;
 public class FeatureFlagOptions
 {
     /// <summary>
-    /// Gets or sets a value indicating whether <see cref="SampleRadarModule"/> is enabled.
+    /// Gets or sets a value indicating whether <see cref="SampleApp1Module"/> is enabled.
     /// </summary>
-    [Description("Enable Sample Radar Module?")]
-    public bool SampleRadarModule { get; set; }
+    [Description("Enable Sample App1 Module?")]
+    public bool SampleApp1Module { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether <see cref="ApplyApril2024TaxRates"/> is enabled.

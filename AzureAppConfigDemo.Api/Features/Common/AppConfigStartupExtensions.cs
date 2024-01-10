@@ -9,7 +9,7 @@ using Microsoft.FeatureManagement;
 /// </summary>
 public static class AppConfigStartupExtensions
 {
-    private const string AppLabel = "radar";
+    private const string AppLabel = "App1";
 
     /// <summary>
     /// Adds the Azure App Config feature.
@@ -25,16 +25,17 @@ public static class AppConfigStartupExtensions
                 .UseFeatureFlags(o => o
                     .Select(KeyFilter.Any, LabelFilter.Null)
                     .Select(KeyFilter.Any, AppLabel)
-                    .CacheExpirationInterval = TimeSpan.FromSeconds(5))
+                    .CacheExpirationInterval = TimeSpan.FromMinutes(5))
                 .Select(KeyFilter.Any, LabelFilter.Null)
                 .Select(KeyFilter.Any, AppLabel)
                 .ConfigureRefresh(o => o
-                    .Register("Radar:Sentinel", true)
-                    .SetCacheExpiration(TimeSpan.FromSeconds(5))));
+                    .Register("Sentinel", AppLabel, true)
+                    .Register("Sentinel", true)
+                    .SetCacheExpiration(TimeSpan.FromMinutes(5))));
         }
 
         appBuilder.Services
-            .Configure<RadarSettings>(config.GetSection("Radar"))
+            .Configure<App1Settings>(config.GetSection(AppLabel))
             .Configure<FeatureFlagOptions>(config.GetSection("FeatureManagement"))
             .AddAzureAppConfiguration()
             .AddFeatureManagement();

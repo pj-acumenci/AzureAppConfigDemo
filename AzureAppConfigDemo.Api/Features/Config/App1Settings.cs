@@ -1,9 +1,9 @@
 ﻿namespace AzureAppConfigDemo.Api.Features.Config;
 
 /// <summary>
-/// Radar settings.
+/// Settings for this app.
 /// </summary>
-public class RadarSettings
+public class App1Settings
 {
     /// <summary>
     /// Gets or sets the palette settings.

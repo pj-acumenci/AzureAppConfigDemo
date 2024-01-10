@@ -10,7 +10,7 @@ using Microsoft.FeatureManagement.Mvc;
 [ApiController]
 [AllowAnonymous]
 [Route("[controller]")]
-[FeatureGate(nameof(FeatureFlagOptions.SampleRadarModule))]
+[FeatureGate(nameof(FeatureFlagOptions.SampleApp1Module))]
 public class SampleModuleController
 {
     /// <summary>
