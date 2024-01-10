@@ -42,7 +42,7 @@ Configuration state can be obtained several ways, (inc. Azure REST API) …But whe
 ## Can I see it in action?
 Sure - that's why this repo exists :)
 (All you need is access to an existing Azure App Configuration instance.)
-Just bung your connection string in **appsettings.local.json**, under `ConnectionStrings:AppConfig`
+Just bung your connection string in [appsettings.local.json](AzureAppConfigDemo.Api/appsettings.local.json#L3)
 
 ## <a name="refs"></a> References
 1. https://12factor.net/config
