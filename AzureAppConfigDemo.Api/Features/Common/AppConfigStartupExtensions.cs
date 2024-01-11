@@ -19,7 +19,7 @@ public static class AppConfigStartupExtensions
     {
         var config = appBuilder.Configuration;
         appBuilder.Services
-            .Configure<App1Settings>(o => config.GetSection("App1"))
+            .Configure<App1Settings>(config.GetSection("App1"))
             .Configure<GlobalSettings>(config.GetSection("Global"))
             .Configure<FeatureFlagOptions>(config.GetSection("FeatureManagement"))
             .AddAzureAppConfiguration()
