@@ -8,7 +8,7 @@ public class App1Settings
     /// <summary>
     /// Gets or sets the palette settings.
     /// </summary>
-    public PaletteSettings Palette { get; set; } = new();
+    public PaletteSettings? Palette { get; set; }
 }
 
 /// <summary>

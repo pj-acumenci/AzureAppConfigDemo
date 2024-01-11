@@ -18,6 +18,13 @@ public static class AppConfigStartupExtensions
     public static void AddAppConfigFeature(this WebApplicationBuilder appBuilder)
     {
         var config = appBuilder.Configuration;
+        appBuilder.Services
+            .Configure<App1Settings>(o => config.GetSection("App1"))
+            .Configure<GlobalSettings>(config.GetSection("Global"))
+            .Configure<FeatureFlagOptions>(config.GetSection("FeatureManagement"))
+            .AddAzureAppConfiguration()
+            .AddFeatureManagement();
+
         var appConfigConnection = appBuilder.Configuration.GetConnectionString("AppConfig");
         if (!string.IsNullOrEmpty(appConfigConnection) )
         {
@@ -29,16 +36,10 @@ public static class AppConfigStartupExtensions
                 .Select(KeyFilter.Any, LabelFilter.Null)
                 .Select(KeyFilter.Any, AppLabel)
                 .ConfigureRefresh(o => o
-                    .Register("Sentinel", AppLabel, true)
-                    .Register("Sentinel", true)
+                    .Register("App1:Sentinel", AppLabel, true)
+                    .Register("Global:Sentinel", true)
                     .SetCacheExpiration(TimeSpan.FromMinutes(5))));
         }
-
-        appBuilder.Services
-            .Configure<App1Settings>(config.GetSection(AppLabel))
-            .Configure<FeatureFlagOptions>(config.GetSection("FeatureManagement"))
-            .AddAzureAppConfiguration()
-            .AddFeatureManagement();
     }
 
     /// <summary>
