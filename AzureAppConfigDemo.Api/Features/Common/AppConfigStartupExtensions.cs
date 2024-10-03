@@ -32,13 +32,13 @@ public static class AppConfigStartupExtensions
                 .UseFeatureFlags(o => o
                     .Select(KeyFilter.Any, LabelFilter.Null)
                     .Select(KeyFilter.Any, AppLabel)
-                    .CacheExpirationInterval = TimeSpan.FromMinutes(5))
+                    .CacheExpirationInterval = TimeSpan.FromSeconds(5))
                 .Select(KeyFilter.Any, LabelFilter.Null)
                 .Select(KeyFilter.Any, AppLabel)
                 .ConfigureRefresh(o => o
                     .Register("App1:Sentinel", AppLabel, true)
                     .Register("Global:Sentinel", true)
-                    .SetCacheExpiration(TimeSpan.FromMinutes(5))));
+                    .SetCacheExpiration(TimeSpan.FromSeconds(5))));
         }
     }
 
