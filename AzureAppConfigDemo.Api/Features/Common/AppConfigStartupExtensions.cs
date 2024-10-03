@@ -1,5 +1,6 @@
 ﻿namespace AzureAppConfigDemo.Api.Features.Common;
 
+using System.Collections.Generic;
 using AzureAppConfigDemo.Api.Features.Config;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.FeatureManagement;
@@ -40,6 +41,10 @@ public static class AppConfigStartupExtensions
                     .Register("Global:Sentinel", true)
                     .SetCacheExpiration(TimeSpan.FromSeconds(5))));
         }
+        else
+        {
+            appBuilder.Services.AddTransient<IConfigurationRefresherProvider, EmptyRefresherProvider>();
+        }
     }
 
     /// <summary>
@@ -53,5 +58,16 @@ public static class AppConfigStartupExtensions
         return !string.IsNullOrEmpty(appConfigConnection)
             ? app.UseAzureAppConfiguration()
             : app;
+    }
+
+    /// <summary>
+    /// Empty implementation for <see cref="IConfigurationRefresherProvider"/>.
+    /// </summary>
+    public class EmptyRefresherProvider : IConfigurationRefresherProvider
+    {
+        /// <summary>
+        /// Gets an empty set of refreshers.
+        /// </summary>
+        public IEnumerable<IConfigurationRefresher> Refreshers => [];
     }
 }
